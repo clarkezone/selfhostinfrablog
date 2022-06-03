@@ -1,36 +1,42 @@
 ---
-title: Customize the Favicon
-author: cotes
-date: 2019-08-11 00:34:00 +0800
-categories: [Blogging, Tutorial]
+title: Case of the throttled daemonset
+author: clarkezone
+date: 2022-06-02 00:34:00 +0800
+categories: [Kubernetes, Troubleshooting]
 tags: [favicon]
 ---
 
-The [favicons](https://www.favicon-generator.org/about/) of [**Chirpy**](https://github.com/cotes2020/jekyll-theme-chirpy/) are placed in the directory `assets/img/favicons/`{: .filepath}. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons.
+Situation
+I have two tiers of monitoring on my cluster.
 
-## Generate the favicon
+Alert firing
 
-Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and then go to the online tool [**Real Favicon Generator**](https://realfavicongenerator.net/) and click the button <kbd>Select your Favicon image</kbd> to upload your image file.
 
-In the next step, the webpage will show all usage scenarios. You can keep the default options, scroll to the bottom of the page, and click the button <kbd>Generate your Favicons and HTML code</kbd> to generate the favicon.
+Task
+Observe the problem: 
 
-## Download & Replace
+Action
+Theory: too conservative limits for node explorer.  First thing I tried was to increase first the ammount of CPU requested and second the limit:
 
-Download the generated package, unzip and delete the following two from the extracted files:
+```
+diff --git a/manifests/monitoring/manifests/nodeExporter-daemonset.yaml b/manifests/monitoring/manifests/nodeExporter-daemonset.yaml
+index e3901b0..a33cd39 100644
+--- a/manifests/monitoring/manifests/nodeExporter-daemonset.yaml
++++ b/manifests/monitoring/manifests/nodeExporter-daemonset.yaml
+@@ -38,10 +38,11 @@ spec:
+         name: node-exporter
+         resources:
+           limits:
+-            cpu: 250m
++            cpu: 500m
+             memory: 180Mi
+           requests:
+-            cpu: 102m
++            #            cpu: 102m
++            cpu: 250m
+             memory: 180Mi
+         volumeMounts:
+         - mountPath: /host/sys
+```
 
-- `browserconfig.xml`{: .filepath}
-- `site.webmanifest`{: .filepath}
-
-And then copy the remaining image files (`.PNG`{: .filepath} and `.ICO`{: .filepath}) to cover the original files in the directory `assets/img/favicons/`{: .filepath} of your Jekyll site. If your Jekyll site doesn't have this directory yet, just create one.
-
-The following table will help you understand the changes to the favicon files:
-
-| File(s)             | From Online Tool                  | From Chirpy |
-|---------------------|:---------------------------------:|:-----------:|
-| `*.PNG`             | ✓                                 | ✗           |
-| `*.ICO`             | ✓                                 | ✗           |
-
->  ✓ means keep, ✗ means delete.
-{: .prompt-info }
-
-The next time you build the site, the favicon will be replaced with a customized edition.
+Outcome
