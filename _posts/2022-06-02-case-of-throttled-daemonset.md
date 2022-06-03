@@ -13,15 +13,17 @@ Around about late May 2022, an alert started firing.
 
 
 ## Task
-Theory: too conservative limits for node explorer.  First thing I tried was to increase first the ammount of CPU requested and second the limit:
-
-The approach I came up with to confirm theory and fix alert:
+Theory: too conservative limits for node explorer.  The approach I came up with to confirm theory and fix alert:
 
 1. Observe the problem in the cluster and understand exactly what is throttled and by how much.  In the process get my head round CPU reests / limis in particular what the various numbers and percentages actually mean
 2. Confirm understanding by changing limits to confirm I've pinpointed the correct entity and values.
 3. Find root cause.. what is putting load on the node exporter to cause it to exceed limit
 
 ## Action
+### Observe problem and understand:
+
+### Confirm understanding by changing limits:
+First thing I tried was to increase first the ammount of CPU requested and second the limit:
 
 ```
 diff --git a/manifests/monitoring/manifests/nodeExporter-daemonset.yaml b/manifests/monitoring/manifests/nodeExporter-daemonset.yaml
