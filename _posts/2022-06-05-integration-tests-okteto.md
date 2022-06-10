@@ -21,6 +21,9 @@ Challenges
 4) Tests don't have an incluster mode hence necessary to hard code incluster mode
 5) Can't start namespace watchers on either specific or default namespace.  This may be because i need a cluster role binding
 7) Okteto cloud.. debugging takes around 10 seconds to start
+8) Assuming a simple test worked, the end-2-end integration test requires ReadWriteMany volumes.  It's possible this could be worked around by restructuring test to create a seperate clone job against a readwriteone PVC followed by the webhook update trigger
+
+The overall conclusion at this point is that Okteto isn't a good fit for this scenario
 
 If you are inteterested in following along, grab the prevewd repo.  You can then try running one of the unit tests as follows:
 
