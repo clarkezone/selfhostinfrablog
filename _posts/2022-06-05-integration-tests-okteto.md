@@ -11,12 +11,8 @@ One of the additional challenges comes when the component you are developing is 
 
 To help improve the inner loop in scenarios such as these various solutions have sprung up to solve this kind of problem.  One that I have looked into is Okteto.  I plan on doing a more extensive post in this in the future, for now I wanted to share how I’ve been leverage Okteto as a means of running and debugging some of my unit and integration tests that test code that creates job resources on the fly by integrating with the cluster API.
 
-```cs
-class test {
-    string hello;
-}
-```
+I've experimented with Okteto for a couple of use cases, firstly debugging code that integrates with the cluster API such as the job management logic.  Secondly, using Okteto as a mechanism for running integration tests that depend on kubernetes.
 
-**Also looking at editing workflows**
+If you are inteterested in following along, grab the prevewd repo.  You can then try running one of the unit tests as follows:
 
-Working Copy and 1writer seems like a pretty great combo.  Amazing.
+1. thing
