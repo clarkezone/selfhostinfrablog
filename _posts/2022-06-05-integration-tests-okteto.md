@@ -24,4 +24,14 @@ Challenges
 
 If you are inteterested in following along, grab the prevewd repo.  You can then try running one of the unit tests as follows:
 
-1. thing
+1. enable unit tests by editing machine config (not user config) and adding:
+```
+{
+    "go.buildFlags": [
+         "-tags=unit,integration"
+     ],
+     "go.buildTags": "-tags=unit,integration",
+     "go.testTags": "-tags=unit,integration"
+}
+```
+
