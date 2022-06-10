@@ -13,6 +13,15 @@ To help improve the inner loop in scenarios such as these various solutions have
 
 I've experimented with Okteto for a couple of use cases, firstly debugging code that integrates with the cluster API such as the job management logic.  Secondly, using Okteto as a mechanism for running integration tests that depend on kubernetes.
 
+Challenges
+
+1) Unit tests require environment variables to be set.  Those are currently not checked in, need to add .previewd_test.env
+2) In machine settings, need to alter the path to point to the location in tree (can settings use %USERPROFILE?)
+3) Because files are synced into Okteto, there is no git presense there hence need to hard code gitroot
+4) Tests don't have an incluster mode hence necessary to hard code incluster mode
+5) Can't start namespace watchers on either specific or default namespace.  This may be because i need a cluster role binding
+7) Okteto cloud.. debugging takes around 10 seconds to start
+
 If you are inteterested in following along, grab the prevewd repo.  You can then try running one of the unit tests as follows:
 
 1. thing
