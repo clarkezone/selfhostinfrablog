@@ -21,9 +21,9 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Selfhost Infra Block                          # the main title
+title: Extreme Cloud Native                          # the main title
 
-tagline: Experiences self hosting on kubernetes   # it will display as the sub-title
+tagline: Learnings from self hosting on kubernetes the hard way   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
@@ -83,7 +83,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://pbs.twimg.com/profile_images/1501440969018798082/0IpQf1Y3_400x400.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
