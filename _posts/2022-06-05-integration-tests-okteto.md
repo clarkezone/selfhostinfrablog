@@ -5,7 +5,7 @@ date: 2022-06-05 19:51:02 -0800
 categories: [kubernetes, testing]
 tags: [okteto, devproductivity]
 ---
-DRAFT4
+DRAFT5
 
 If you are doing development targeting Kubernetes, you will know that the inner loop can be challenging.  The process is to typically work locally, create a image, push to a registry somewhere hopefully not too far away, update a kubernetes deployment manifest to point to the new version of the image, restart the deployment in the cluster, observe logs.  All of this is time and friction for iterating fast.
 
