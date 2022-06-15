@@ -21,6 +21,11 @@ Theory: too conservative limits for node explorer.  The approach I came up with 
 
 ## Action
 ### Observe problem and understand:
+link to docs https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+what is configured and what it means
+can i confirm in k9s or top
+can i confirn in historical data in grafana
+where is the runbook defined?
 
 ### Confirm understanding by changing limits:
 First thing I tried was to increase first the ammount of CPU requested and second the limit:
