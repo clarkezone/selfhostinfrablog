@@ -6,9 +6,9 @@ categories: [Kubernetes]
 tags: [manifests]
 ---
 ## Situation
-In my journey into kubernetes over the last couple of years, I've picked up a number of tips to accerate the creation of basic manifests to boostrap an application in my home clusters.  I recently wanted to kick the tyres on Homer, a simple homepage system for indexing services on a home cluster and thought I'd write the steps down in case they are of use to others.
+Kubernetes manifests can be quite intimidating if you are coming from docker backrgound and/or are new to kubernetes.  If you want to quickly build a kubernetes deployment / service to kick the tires on a new application / container image, I've learned that there is an easier way than having to hand author said manifests.  Here I'll show my approach which I recently applied to the scenario of building out a test environment for the Homer project TODO
 
-## Prerequisits
+## Prerequisits to follow this tutorial
 k8s cluster (k3s)
 kubectl
 kubectl autocompletion
@@ -16,12 +16,10 @@ kubectl plugin system
 klean plugin
 k9s
 
-For more detail on the above, see my [[Kubernetes tools I used in 2022]] post
+For more detail on the above, see [[Kubernetes tools I used in 2022]] post
 
-This article assumes you understand some of the basic kubernetes resource types such as  pods, deployments, services and have a working familiarity with kubectl
-
-** Approach
-Kubernetes manifests can be quite intimidating if you are coming from docker and/or are new to kubernetes.
+## Approach
+This article assumes you have a basic understanding some of simple kubernetes concepts such as resource types pods, deployments, services and have a working familiarity with kubectl
 
 1. Create a deployment
 `kubectl create deployment homer-deployment --image b4bz/homer`
@@ -30,7 +28,10 @@ Kubernetes manifests can be quite intimidating if you are coming from docker and
 `kubectl create service clusterip homer-service --tcp 8080
 
 3. Test frontend via port forwarding
+`kubectl port-forward services/homer-service 8085:8080`
 
-4. Create clean manifests`
+4. Create clean manifests
+`kubectl get deployment homer-deployment -o yaml > kubectl neat > homer-deployment.yaml`
+`kubectl get deployment homer-service -o yaml > kubectl neat > homer-service.yaml`
 
 5. Create an ingress
