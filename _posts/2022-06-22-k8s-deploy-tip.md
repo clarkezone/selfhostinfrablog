@@ -23,6 +23,14 @@ This article assumes you understand some of the basic kubernetes resource types 
 ** Approach
 Kubernetes manifests can be quite intimidating if you are coming from docker and/or are new to kubernetes.
 
-1. Step 1 create a deployment
+1. Create a deployment
+`kubectl create deployment homer-deployment --image b4bz/homer`
 
+2. Create a service
+`kubectl create service clusterip homer-service --tcp 8080
 
+3. Test frontend via port forwarding
+
+4. Create clean manifests`
+
+5. Create an ingress
