@@ -1,14 +1,16 @@
 ---
-title: Tips for bootstrapping kubernetes manifests
+title: Tips for bootstrapping kubernetes workloads
 author: clarkezone
 date: 2022-06-21 00:34:00 +0800
 categories: [Kubernetes]
 tags: [manifests]
 ---
 ## Situation
-Kubernetes manifests can be quite intimidating if you are coming from docker backrgound and/or are new to kubernetes.  If you want to quickly build a kubernetes deployment / service to kick the tires on a new application / container image, I've learned that there is an easier way than having to hand author said manifests.  Here I'll show my approach which I recently applied to the scenario of building out a test environment for the Homer project TODO
+Kubernetes manifests can be quite intimidating if you are coming from docker backrgound or are new to kubernetes.  Parituclarly if you are using the terminal, to quickly build a workload made up of a kubernetes deployment with service and ingress to kick the tires on a new application or container image it may seem like the only option is to copy from existing manifests or refer to the documentation.
 
-## Prerequisits to follow this tutorial
+Over time, I've learned that there is an easier way which is now my default method of quikly getting started setting up a new workload from the terminal.  In this post I'll show my approach which via a worked example of building out a test environment for the [Homer static homepage](https://github.com/bastienwirtz/homer) in my homelab.
+
+## Prerequisits to follow along
 k8s cluster (k3s)
 kubectl
 kubectl autocompletion
@@ -19,7 +21,14 @@ k9s
 For more detail on the above, see [[Kubernetes tools I used in 2022]] post
 
 ## Approach
-This article assumes you have a basic understanding some of simple kubernetes concepts such as resource types pods, deployments, services and have a working familiarity with kubectl
+> This article assumes you have a basic understanding some of simple kubernetes concepts 
+> such as the basic resource types (pods, deployments, services, ingress) and have a 
+> working familiarity with `kubectl`.
+
+Kubernetes resources are most familiar in their textual form since `yaml` files are what you typically read about in articles, type in and manipulate day-to-day.  But thse manifests are really proxies for live objects representing reasources that live in the kubernetes resource database in your cluster.  One of the many nice features of `kubectl`  is the ability to convert from this live "object" form back to the textrual representation. So once you have an object you can get it back as yaml. 
+
+## Steps
+This article assumes you have a basic understanding some of simple kubernetes concepts such as resource types [pods](https://kubernetes.io/docs/concepts/workloads/pods/), [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [services](https://kubernetes.io/docs/concepts/services-networking/service/) and have a working familiarity with kubectl
 
 1. Create a deployment
 `kubectl create deployment homer-deployment --image b4bz/homer`
