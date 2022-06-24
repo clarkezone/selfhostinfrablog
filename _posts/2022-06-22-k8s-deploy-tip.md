@@ -33,14 +33,27 @@ This article assumes you have a basic understanding some of simple kubernetes co
 1. Create a deployment
 `kubectl create deployment homer-deployment --image b4bz/homer`
 
-2. Create a service
-`kubectl create service clusterip homer-service --tcp 8080
+2. Create clean manifests for the deployment
+`kubectl get deployment homer-deployment -o yaml > kubectl neat > homer-deployment.yaml`
+
+3. Delete resource
+4. Remove extranious values from manifest 
+
+3. Edit the saved manifest, name of deployment, and app mentadata that the service will use. Make note of the app name
+
+3. Create a service
+`kubectl create service clusterip homer-service --tcp 8080`
+
+4. create clean manifest for service  `kubectl get deployment homer-service -o yaml > `kubectl neat > homer-service.yaml`
+
+delete resource
+
+5. edit the app that the service points to
+6. get rid of hard coded cluster ip
 
 3. Test frontend via port forwarding
 `kubectl port-forward services/homer-service 8085:8080`
 
-4. Create clean manifests
-`kubectl get deployment homer-deployment -o yaml > kubectl neat > homer-deployment.yaml`
-`kubectl get deployment homer-service -o yaml > kubectl neat > homer-service.yaml`
-
 5. Create an ingress
+
+6. config files
