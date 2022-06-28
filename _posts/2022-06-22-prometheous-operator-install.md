@@ -43,9 +43,15 @@ kubectl delete -f .
 ```bash
 # todo 
 ```
-2. 
+2. Install
 
 ```bash
 kubectl create -f bundle.yaml
 ```
+3. Deploy a prometheus operator
+4. Deploy a simple prometheus instance
+Test it using previewd webserver
+Service monitor for previewd
+
+Install grafana with just my options, persistent storage, default point to prom and loki, default un and password, 
 
