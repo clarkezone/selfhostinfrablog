@@ -24,10 +24,11 @@ For more detail on the above, see [[Kubernetes tools I used in 2022]] post
 One of the things that confused me about these two approachs is that they are often disussed together and the documentation doesn't have examples that contrast between then.
 
 Documentation: [https://prometheus-operator.dev](https://prometheus-operator.dev)
-Github repo: [https://github.com/prometheus-operator/prometheus-operator]9https://github.com/prometheus-operator/prometheus-operator)
+Github repo: [https://github.com/prometheus-operator/prometheus-operator](https://github.com/prometheus-operator/prometheus-operator)
+Article that helped: [https://rpi4cluster.com/monitoring/monitor-intro/](https://rpi4cluster.com/monitoring/monitor-intro/)
 
 
-## Steps
+## Uninstall
 1. If you have previously used the kube-prometheus instructions delete from manifests
 ```bash
 kubectl delete -f .
@@ -36,19 +37,24 @@ kubectl delete -f .
 > which manifests (no pun intended) as stuck in deleting
 > Get cluster API status.. whoops this thing is missing hence api server failing
 > delete from files
+
 2. Delete previous CRDs
 
 ## Install Kubernetes operator from Bundle
-1. Clone the bundle
+1. grab the bundle
 ```bash
-# todo 
+curl -LO https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.52.0/bundle.yaml
 ```
 2. Install
 
 ```bash
 kubectl create -f bundle.yaml
 ```
-3. Deploy a prometheus operator
+
+> This will install the prometheus operator into the default namespace.  If you want to use > a different namespace, you'll need to do update the namespace by doing something similar > to `sed -i 's/namespace: default/namespace: monitoring/g' bundle.yaml` 
+
+The install will result 
+
 4. Deploy a simple prometheus instance
 Test it using previewd webserver
 Service monitor for previewd
