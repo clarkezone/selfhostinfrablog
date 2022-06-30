@@ -56,6 +56,97 @@ kubectl create -f bundle.yaml
 The install will result 
 
 4. Deploy a simple prometheus instance
+
+This requires the following kubernetes objects:
+- ServiceAccount
+- ClusterRole
+- ClusterRoleBinding
+- Prometheus
+- Ingress (ommitted from this example)
+
+The Prometheus custom resource is the key.  It leverages the prometheus operator to create a prometheus instance 
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: prometheus-instance
+  name: prometheus-instance
+  namespace: monitoring
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: prometheus-instance
+  name: prometheus-instance
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/metrics
+  - services
+  - endpoints
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: prometheus-instance
+  name: prometheus-instance
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-instance
+subjects:
+- kind: ServiceAccount
+  name: prometheus-instance
+  namespace: monitoring
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app: prometheus-instance
+  name: prometheus-deployement
+  namespace: monitoring
+spec:
+  enableAdminAPI: true
+  resources:
+    requests:
+      memory: 400Mi
+  serviceAccountName: prometheus-instance
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+```
+
+
+ 
 Test it using previewd webserver
 Service monitor for previewd
 
