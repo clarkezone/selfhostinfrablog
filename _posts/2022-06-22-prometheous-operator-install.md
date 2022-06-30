@@ -145,6 +145,8 @@ spec:
   serviceMonitorSelector: {}
 ```
 
+If you apply the above, you should see the following resources created in the monitoring namespace.
+
 
  
 Test it using previewd webserver
