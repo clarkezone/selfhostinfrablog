@@ -5,6 +5,7 @@ date: 2022-06-27 00:34:00 +0800
 categories: [Grafana]
 tags: [Dashboard]
 ---
+# Draft - work in progress
 ## Situation
 Getting your self-hosting infrastructure configured with the appropriate observability stack is a key consideration.  I've been investigating different approachs to this including the kube-prometheus stack and the prometheus operator.  This post talks about the latter.
 
@@ -25,4 +26,7 @@ Many examples of grafana installed on kubernetes, including prom-kube install th
 
 Article that helped: [https://rpi4cluster.com/monitoring/monitor-intro/](https://rpi4cluster.com/monitoring/monitor-intro/)
 
-1. 
+## Basic deployment
+
+
+1. Pre-populate account details

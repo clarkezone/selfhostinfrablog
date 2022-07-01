@@ -5,6 +5,7 @@ date: 2022-06-02 00:34:00 +0800
 categories: [Kubernetes, Troubleshooting]
 tags: [favicon]
 ---
+# Draft - work in progress
 DRAFT7
 
 ## Situation

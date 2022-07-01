@@ -5,6 +5,7 @@ date: 2022-06-21 00:34:00 +0800
 categories: [Kubernetes]
 tags: [manifests]
 ---
+# Draft - work in progress
 ## Situation
 Kubernetes manifests can be quite intimidating if you are coming from docker backrgound or are new to kubernetes.  Parituclarly if you are using the terminal, to quickly build a workload made up of a kubernetes deployment with service and ingress to kick the tires on a new application or container image it may seem like the only option is to copy from existing manifests or refer to the documentation.
 

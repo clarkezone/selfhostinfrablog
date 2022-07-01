@@ -5,6 +5,7 @@ date: 2022-06-27 00:34:00 +0800
 categories: [Kubernetes]
 tags: [AKS]
 ---
+# Draft - work in progress
 ## Situation
 First AKS deployment
 

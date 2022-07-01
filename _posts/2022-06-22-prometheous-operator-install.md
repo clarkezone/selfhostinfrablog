@@ -5,6 +5,7 @@ date: 2022-06-27 00:34:00 +0800
 categories: [Prometheus]
 tags: [Metrics, Infrastructure]
 ---
+# Draft - work in progress
 ## Situation
 Getting your self-hosting infrastructure configured with the appropriate observability stack is a key consideration.  I've been investigating different approachs to this including the kube-prometheus stack and the prometheus operator.  This post talks about the latter.
 
