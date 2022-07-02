@@ -28,5 +28,14 @@ Article that helped: [https://rpi4cluster.com/monitoring/monitor-intro/](https:/
 
 ## Basic deployment
 
-
 1. Pre-populate account details
+
+## Default Dashboards
+ 
+## Installing plugins
+
+If you have dashboards that need plugins like there is another small wrinkle to learn.  I encountered this with the traefik dashboard that requires `grafana-piechart-panel`.  The instructions for the plugin don't explain how to do this in a docker environment.  I discovered the answer here: https://grafana.com/docs/grafana/next/setup-grafana/installation/docker/#install-plugins-in-the-docker-container via this stackoverflow post: https://stackoverflow.com/questions/60599379/how-to-install-grafana-plugin-in-kubernetes
+
+Turns out it was as easy as defining 
+
+ which you can learn about here, https://grafana.com/grafana/plugins/grafana-piechart-panel 
