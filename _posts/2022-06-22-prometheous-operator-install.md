@@ -149,9 +149,26 @@ spec:
 If you apply the above, you should see the following resources created in the monitoring namespace.
 
 
+Key lines are serviceMonitorNamespaceSelector which will pick up service monitor configurations.
+
+Let's look at an example of one of those
  
 Test it using previewd webserver
 Service monitor for previewd
+
+
+## Alerting
+In order to get alerting working, we need to tweek the prometheus instance manifest
+
+```
+ruleSelector: {}
+```
+
+This will now pick up rules such as the following:
+
+```
+todo rule
+```
 
 Install grafana with just my options, persistent storage, default point to prom and loki, default un and password, 
 
