@@ -166,9 +166,48 @@ ruleSelector: {}
 
 This will now pick up rules such as the following:
 
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+  name: blog-rules
+  namespace: monitoring
+spec:
+  groups:
+  - name: nginx_rps
+    rules:
+    - alert: RpsAboveSafe
+      annotations:
+        description:  is taking trafix above 30RP/s
+        summary: High traffic for last 1 minute.
+      expr: |
+        (
+        rate(nginx_http_requests_total[1m])>30
+        )
+      for: 1m
+      labels:
+        severity: warning
 ```
-todo rule
+
+When this manifest is applied, the operator will create the necessary rule configuration files and apply them to the prometheus instances that the operator is controlling which is seriously cool!
+
+In order for the rules to be useful, you need alertmanager to actually notify you when an alert triggers.  Alertmanager can be configured with a number of different backends.  I found that this was another area that is a little rough around the edges in terms of documentation.
+
+This was the best documentation I could find:
+https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/alerting.md
+
+With some aditional components here:
+https://blog.container-solutions.com/prometheus-operator-beginners-guide
+
+Using this documentation I cooked up the following configuration file:
+
 ```
+TODO: alertmanagerconfig
+```
+
+In order to make it work, I needed to BASE64 my todo credentials
+
 
 Install grafana with just my options, persistent storage, default point to prom and loki, default un and password, 
 
