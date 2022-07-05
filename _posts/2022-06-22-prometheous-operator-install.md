@@ -200,14 +200,50 @@ https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentati
 With some aditional components here:
 https://blog.container-solutions.com/prometheus-operator-beginners-guide
 
-Using this documentation I cooked up the following configuration file:
+Using this documentation I started by creating a customer `AlertmanagerConfig` resource type along with a paired Secrets configuration and then referenced this from the AlertManager manifest using
 
+```yaml
+alertmanagerConfigSelector:
+  matchlabels:
+    alertManagerConfig: pushover-alerting
+``` 
+
+In order to make it work, I needed to BASE64 the credentials in the secrets file.  This approach got close but ultimately failed.  When I looked at the resulting alertmanager configuration in the container, there was a null entry coming from somewhere.  This looks like a bug in the prometheus operator.  THe `AlertmanagerConfig` is considered alpha, so I decided to bail on this approach and try something else.
+
+I ended up using this secret
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/instance: main
+    app.kubernetes.io/name: alertmanager
+  name: alertmanager-pushover
+  namespace: monitoring
+stringData:
+  alertmanager.yaml: |-
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: pushover
+      continue: false
+    receivers:
+    - name: pushover
+      pushover_configs:
+        - send_resolved: false
+          user_key: REDACTED
+          token: REDACTED
+type: Opaque
 ```
-TODO: alertmanagerconfig
+
+and then referencing it from the AlertManager manifest with:
+
+```yaml
+  configSecret: alertmanager-pushover
 ```
 
-In order to make it work, I needed to BASE64 my todo credentials
-
+This seemed to work fine and is also slightly simpler as the syntax for the alertmanager.yaml embedded in the secret is exactly the native format unlike in the AlertManagerConfig approach.  Great.
 
 Install grafana with just my options, persistent storage, default point to prom and loki, default un and password, 
 
