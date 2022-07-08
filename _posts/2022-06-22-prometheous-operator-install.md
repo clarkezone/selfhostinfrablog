@@ -10,9 +10,9 @@ tags: [Metrics, Infrastructure]
 Getting your self-hosting infrastructure configured with the appropriate observability stack is a key consideration.  I've been investigating different approachs to this including the kube-prometheus stack and the prometheus operator.  This post talks about the latter.
 
 ## Prerequisits to follow along
-A test cluster
-kubectl
-kubectl autocompletion
+- A test cluster
+- kubectl
+- kubectl autocompletion
 
 For more detail on the above, see [[Kubernetes tools I used in 2022]] post
 
