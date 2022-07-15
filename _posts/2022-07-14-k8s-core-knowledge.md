@@ -17,30 +17,52 @@ Worker Node
 
 Manifest vs Resource
 
+CNI, CSI, ?cluster interface
 
 ### Kubernetes Resource Types
 Node
 Pod
+Namespace
 Replicaset
 Deployment
+endpoint
 Service
 Ingress
 Custom Resource Definition
 ConfigMap
+PersistentVolume
+PersistentVolumeClaim
+ServiceAccounts, Roles, Rolebindings
+Certificate
+Secret
+Job
+
+### Tutorials
+Rancher youtube
+Kubernetes the hardway TODO link
+AKS the hardway TODO link
 
 ### Labels and metadata
+look at knowledge
 
 ### Tools
+wsl
 Kubectl with autocompletion
 k9s
+Dashboard
 
 ### Managing and switching contexts
 
 ### Techniques / scenarios
+Install Kube dashboard
 Build container from dockerfile
 Push container to container registry
 Create and delete resources using kubectl
 Create and delete resource from manifests
 Edit resources
+Get logs from pods / deployments
+Describe deployments
 Get yaml representation from a resource in cluster
 Restart a deployment
+Query and set default cluster storage provisioner
+Exec into a pod
