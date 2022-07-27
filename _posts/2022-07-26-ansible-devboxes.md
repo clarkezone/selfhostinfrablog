@@ -1,7 +1,7 @@
 ---
 title: Ansible, linux servers, linux devboxes
 author: clarkezone
-date: 2022-06-27 00:34:00 +0800
+date: 2022-07-27 00:34:00 +0800
 categories: [ansible]
 tags: [devbox, linux]
 ---
