@@ -47,6 +47,8 @@ look at knowledge
 
 ### Tools
 wsl
+git
+docker (or podman)
 Kubectl with autocompletion
 k9s
 Dashboard
