@@ -22,3 +22,8 @@ k9s
 For more detail on the above, see [[Kubernetes tools I used in 2022]] post
 
 ## Approach
+Deploy a digital ocean k3s single node cluster using ansible and flux 
+(temporary) manually deploy cert manager needs to move to flux
+(temporary) manually deploy traefik with web front end needs to move to flux
+
+Challenges access denied on ping
