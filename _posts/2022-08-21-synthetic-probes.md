@@ -26,4 +26,43 @@ Deploy a digital ocean k3s single node cluster using ansible and flux
 (temporary) manually deploy cert manager needs to move to flux
 (temporary) manually deploy traefik with web front end needs to move to flux
 
-Challenges access denied on ping
+Challenges access denied on ping.. turned out to be access to raw sockets.
+
+## Steps
+
+1. Create k3s host in digital ocean
+ 
+```bash
+ansible-playbook k3sbox.yml --extra-vars=@vars/k3sflux-dohost.yml --extra-vars=@vars/k3sflux-user.yml --extra-vars=@vars/k3sflux-k3s.yml -K
+```
+
+2. Get config and merge
+
+```bash
+kubectl konfig export -k ~/.kube/config k3s-c1 k3s-c2 clarkecluster3-admin > ~/baseconfig
+
+scp james@homelabmonitoring-do:/etc/rancher/k3s/k3s.yaml ~/monitoringkubeconfig.yml
+
+./renamecontext.sh -i ~/monitoringkubeconfig.yml -c monitoringcluster -u monitoringuser -t monitoringcontext
+
+kubectl konfig merge ~/baseconfig ~/monitoringkubeconfig.yml > ~/merged
+```
+
+Temp steps need automating:
+Apply certmanager dir
+
+./scripts/install.sh traefik
+
+Apply Traefik dir
+
+When certmanager up, restart traefik daemonset
+
+Update Tailscale DNS
+
+dashboard should work
+
+Install flux
+
+create known_hosts on the remotemonitoring
+
+ansible-playbook k3sbox-configflux.yml --extra-vars=@vars/k3sflux-dohost.yml --extra-vars=@vars/k3sflux-user.yml -K
