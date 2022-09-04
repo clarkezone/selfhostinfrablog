@@ -30,6 +30,18 @@ Challenges access denied on ping.. turned out to be access to raw sockets.
 
 ## Steps
 
+0. Reset
+```
+Delete DoNode
+Erase tailscale
+wipe known hosts
+
+```bash
+kubectl konfig export -k ~/.kube/config k3s-c1 k3s-c2 clarkecluster3-admin > ~/baseconfig
+mv ~/.kube/config ~/.kube/backup-8-31
+mv ~/baseconfig ~/.kube/config
+```
+
 1. Create k3s host in digital ocean
  
 ```bash
@@ -49,7 +61,7 @@ kubectl konfig merge ~/baseconfig ~/monitoringkubeconfig.yml > ~/merged
 ```
 
 Temp steps need automating:
-Apply certmanager dir
+Apply certmanager dir. Ensure cluster issuer is present before moving on
 
 ./scripts/install.sh traefik
 
@@ -61,8 +73,12 @@ Update Tailscale DNS
 
 dashboard should work
 
-Install flux
+3. Flux
 
 create known_hosts on the remotemonitoring
 
 ansible-playbook k3sbox-configflux.yml --extra-vars=@vars/k3sflux-dohost.yml --extra-vars=@vars/k3sflux-user.yml -K
+ 
+4. Firewall
+ 
+Ansible-playbook k3sbox-firewall.yml --extra-vars=@vars/k3sflux-dohost.yml -K
