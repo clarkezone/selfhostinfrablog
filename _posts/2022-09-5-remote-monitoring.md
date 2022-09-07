@@ -34,6 +34,8 @@ Install via helm:
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts && helm repo update && helm install ksm prometheus-community/kube-state-metrics --set image.tag=v2.4.2 -n default
 ```
 
+KSM docs: TODO
+
 kube-state-metrics is a simple service that listens to the Kubernetes API server and generates metrics about the state of the objects.
 The exposed metrics can be found here:
 https://github.com/kubernetes/kube-state-metrics/blob/master/docs/README.md#exposed-metrics
@@ -43,3 +45,6 @@ In your case, ksm-kube-state-metrics.default.svc.cluster.local:8080/metrics
 
 They are served either as plaintext or protobuf depending on the Accept header.
 They are designed to be consumed either by Prometheus itself or by a scraper that is compatible with scraping a Prometheus client endpoint.
+
+### Logging daemon and config
+
