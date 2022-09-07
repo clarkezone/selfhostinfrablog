@@ -22,4 +22,24 @@ https://grafana.com/blog/2022/07/13/introducing-kubernetes-monitoring-in-grafana
 
 https://grafana.com/docs/grafana-cloud/kubernetes-monitoring/configuration/
 
-Grafana Agent
+### Grafana Agent
+Manifests
+
+
+### Kube state metrics
+
+Install via helm:
+
+```sh
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts && helm repo update && helm install ksm prometheus-community/kube-state-metrics --set image.tag=v2.4.2 -n default
+```
+
+kube-state-metrics is a simple service that listens to the Kubernetes API server and generates metrics about the state of the objects.
+The exposed metrics can be found here:
+https://github.com/kubernetes/kube-state-metrics/blob/master/docs/README.md#exposed-metrics
+
+The metrics are exported on the HTTP endpoint /metrics on the listening port.
+In your case, ksm-kube-state-metrics.default.svc.cluster.local:8080/metrics
+
+They are served either as plaintext or protobuf depending on the Accept header.
+They are designed to be consumed either by Prometheus itself or by a scraper that is compatible with scraping a Prometheus client endpoint.
