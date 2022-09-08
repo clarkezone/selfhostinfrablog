@@ -47,6 +47,8 @@ They are served either as plaintext or protobuf depending on the Accept header.
 They are designed to be consumed either by Prometheus itself or by a scraper that is compatible with scraping a Prometheus client endpoint.
 
 ### Logging daemon and config
+Fix default storage classes
+`kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'`
 
 ### What testing it out
 #### metrics
