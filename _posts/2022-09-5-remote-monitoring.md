@@ -48,3 +48,12 @@ They are designed to be consumed either by Prometheus itself or by a scraper tha
 
 ### Logging daemon and config
 
+### What testing it out
+#### metrics
+#### Logs
+#### Tracing
+#### Alerts
+#### Synthetic monitoring
+
+### Next: Azure Container insights
+
