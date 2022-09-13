@@ -50,6 +50,66 @@ spec:
       storage: 1Gi
 ``` 
 
+or.. is it EmptyDir to the rescue instead?
+
 Because a single node may have multiple nginx instances, I needed to come up with a local directory structure that enabled sharing web content to avoid every replica having it’s own
 
 ## Manifests
+
+Frontend
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontenddeployment
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jekyllpreview
+  template:
+    metadata:
+    spec:
+      serviceAccountName: previewd-sa 
+      containers:
+      - name: localsync
+        image: todo
+      - name: blog-serve
+        image: nginx:1.20-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: “/usr/share/nginx/html”
+          name: blogrender
+          readOnly: true
+        - mountPath: /etc/nginx/conf.d/default.conf
+          readOnly: true
+          name: nginxconfig
+          subPath: default.conf
+      - name: nginx-exporter
+        image: nginx/nginx-prometheus-exporter:0.10.0
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - name: nginx-ex-port
+          containerPort: 9113
+        args:
+          - -nginx.scrape-uri=http://localhost:80/nginx_status
+        volumeMounts:
+          - mountPath: /src
+            name: blogsource
+        ports:
+        - containerPort: 8090
+      volumes:
+        - name: blogrender
+          persistentVolumeClaim:
+            claimName: blogrender-pvc
+        - name: nginxconfig
+          configMap:
+            name: nginx-cm
+```  
+
+
