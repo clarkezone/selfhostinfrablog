@@ -73,8 +73,18 @@ spec:
     spec:
       serviceAccountName: previewd-sa 
       containers:
-      - name: localsync
-        image: todo
+      - name: localsync 
+        image: theorangeone/lsyncd                 
+        volumeMounts:   
+         - mountPath: "/config/lsyncd.lua"
+           name: syncer        
+           subPath: lsyncd.lua
+           readOnly: true                                        
+         - mountPath: "/sourcedir"
+           name: blogrender
+           readOnly: true
+         - mountPath: "/cachedir"
+           name: cachevolume
       - name: blog-serve
         image: nginx:1.20-alpine
         ports:
@@ -98,18 +108,17 @@ spec:
           containerPort: 9113
         args:
           - -nginx.scrape-uri=http://localhost:80/nginx_status
-        volumeMounts:
-          - mountPath: /src
-            name: blogsource
-        ports:
-        - containerPort: 8090
-      volumes:
-        - name: blogrender
-          persistentVolumeClaim:
-            claimName: blogrender-pvc
-        - name: nginxconfig
-          configMap:
-            name: nginx-cm
-```  
+      volumes:       
+        - name: blogrender                                       
+          persistentVolumeClaim:                                 
+            claimName: blogrender-pvc                            
+        - name: nginxconfig                                      
+          configMap:    
+            name: nginx-cm 
+        - name: syncer         
+          configMap:        
+            name: syncer-cm                                      
+        - name: cachevolume
+          emptyDir: {}```  
 
 
