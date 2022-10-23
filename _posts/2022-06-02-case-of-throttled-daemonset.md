@@ -1,5 +1,6 @@
 ---
 title: Case of the throttled daemonset
+commentshortlink: "http://foo/345"
 author: clarkezone
 date: 2022-06-02 00:34:00 +0800
 categories: [Kubernetes, Troubleshooting]

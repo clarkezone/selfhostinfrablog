@@ -1,5 +1,6 @@
 ---
 layout: post
+commentshortlink: "http://foo/123"
 title:  "Hello world!"
 date: 2018-10-12 19:51:02 -0800
 categories: [jekyll, blogging]
