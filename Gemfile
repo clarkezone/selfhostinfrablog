@@ -2,7 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "jekyll-theme-chirpy-clarkezone", "~> 5.1", ">= 5.1.0", path: "/src/clarkezone/jekyll-theme-chirpy-clarkezone"
+gem "jekyll-theme-chirpy-clarkezone", "~> 5.1", ">= 5.1.0"
+# gem "jekyll-theme-chirpy-clarkezone", "~> 5.1", ">= 5.1.0", path: "/src/clarkezone/jekyll-theme-chirpy-clarkezone"
 
 group :test do
   gem "html-proofer", "~> 3.18"
